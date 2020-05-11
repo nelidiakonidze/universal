@@ -12,9 +12,12 @@ install:
   - git fetch upstream master
   - yarn
 
+env: 
+ - TEST_SUITE="ng lint"
+ - TEST_SUITE="ng test"
+
 script:
-  - yarn lint
-  - yarn test
+- $TEST_SUITE
 
 deploy:
   - provider: script
