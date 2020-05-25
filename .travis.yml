@@ -17,10 +17,8 @@ matrix:
   fast_finish: true
   include:
     - stage: lint
-      install: skip
       script: ng lint
     - stage: test
-      install: skip
       script: ng test
 
 
