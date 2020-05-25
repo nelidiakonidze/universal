@@ -12,20 +12,18 @@ install:
   - git fetch upstream master
   - yarn
 
+matrix:
+  fast_finish: true
+
+  
 jobs:
   include:
-    - &test
-      stage: test
-      install: skip
-      script: ng test
-
-    - &lint
-      <<: *test
-      stage: lint
+    - stage: lint
       install: skip
       script: ng lint
-
-
+    - stage: test
+      install: skip
+      script: ng test
 
 
 
