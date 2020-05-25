@@ -12,17 +12,20 @@ install:
   - git fetch upstream master
   - yarn
 
-env: 
- - TEST_SUITE="ng lint"
- - TEST_SUITE="ng test"
+jobs:
+  include:
+    - &test
+      stage: test
+      install: skip
+      script: ng test
 
-script:
-- $TEST_SUITE
+    - &lint
+      <<: *test
+      stage: lint
+      install: skip
+      script: ng lint
 
-deploy:
-  - provider: script
-    script: yarn deploy
-    skip_cleanup: true
-    on:
-      branch: master
+
+
+
 
