@@ -13,10 +13,9 @@ install:
   - yarn
 
 
-matrix:
-  fast_finish: true
+jobs:
   include:
-    - stage: lint
+    - stage: test
       script: ng lint
     - stage: test
       script: ng test
