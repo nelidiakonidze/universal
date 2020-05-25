@@ -12,11 +12,9 @@ install:
   - git fetch upstream master
   - yarn
 
+
 matrix:
   fast_finish: true
-
-  
-jobs:
   include:
     - stage: lint
       install: skip
