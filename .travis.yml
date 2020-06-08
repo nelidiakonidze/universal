@@ -20,6 +20,7 @@ cache:
   
 matrix:
     include:
+  - stage: test
   - if [ $TRAVIS_BRANCH == "master" ] || [[ -n "$TRAVIS_TAG" ]]; then
       ng lint;
     else
