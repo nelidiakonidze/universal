@@ -1,10 +1,6 @@
-
-stages:
-  - lint 
-  - test 
-
 language: node_js
-node_js: '12'
+node_js: 
+  - '12'
 
 
 install: 
@@ -20,23 +16,21 @@ cache:
   
 matrix:
     include:
-  - stage: test
-    script: 
-      - if [ $TRAVIS_BRANCH == "master" ] || [[ -n "$TRAVIS_TAG" ]]; then
-      ng lint;
-    else
-      yarn affected:lint --base=upstream/master --head=$TRAVIS_BRANCH;
-    fi
-  - stage: test
-    script:
-      - if [ $TRAVIS_BRANCH == "master" ] || [[ -n "$TRAVIS_TAG" ]]; then
-      ng test --maxWorkers=2;
-    else
-      yarn affected:test --base=upstream/master --head=$TRAVIS_BRANCH --maxWorkers=2;
-    fi
-  - stage: test
-    script:
-      - if [ $TRAVIS_BRANCH == "master" ] || [[ -n "$TRAVIS_TAG" ]]; then
-      yarn coverage-runner;
-    fi
+      - stage: test
+        script: 
+        - if [ $TRAVIS_BRANCH == "master" ] || [[ -n "$TRAVIS_TAG" ]]; then
+          ng lint;
+          else
+          yarn affected:lint --base=upstream/master --head=$TRAVIS_BRANCH;
+          fi
+         
+         - if [ $TRAVIS_BRANCH == "master" ] || [[ -n "$TRAVIS_TAG" ]]; then
+          ng test --maxWorkers=2;
+          else
+          yarn affected:test --base=upstream/master --head=$TRAVIS_BRANCH --maxWorkers=2;
+          fi
+        
+         - if [ $TRAVIS_BRANCH == "master" ] || [[ -n "$TRAVIS_TAG" ]]; then
+            yarn coverage-runner;
+            fi
   
