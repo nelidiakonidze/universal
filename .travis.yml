@@ -12,13 +12,17 @@ install:
   - git fetch upstream master
   - yarn
 
+
+
 matrix:
 
-include:
-- stage: test
-install: skip
-script: ng lint
-- stage: test
-install: skip
-script: ng test
+  include:
+    - stage: test
+      install: skip
+      script: ng lint
+    - stage: test
+      install: skip
+      script: ng test
+
+
 
