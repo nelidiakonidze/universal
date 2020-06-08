@@ -39,21 +39,4 @@ matrix:
       - if [ $TRAVIS_BRANCH == "master" ] || [[ -n "$TRAVIS_TAG" ]]; then
       yarn coverage-runner;
     fi
-  - stage: test
-    script:
-      - if [ $TRAVIS_BRANCH == "master" ]; then
-      ng build --prod;
-    elif [[ -n "$TRAVIS_TAG" ]]; then
-      ng build -c stg;
-    else
-      ng build;
-    fi
-
-  # include:
-  #   - stage: test
-  #     script: ng lint
-  #     name: 'lint'
-
-  #   - stage: test
-  #     script: ng test
-  #     name: 'test'
+  
