@@ -12,17 +12,11 @@ install:
   - git fetch upstream master
   - yarn
 
+script: "bundle exec rake test:$TEST_SUITE"
 
-
-matrix:
-
-  include:
-    - stage: test
-      install: skip
-      script: ng lint
-    - stage: test
-      install: skip
-      script: ng test
+env:
+  - TEST_SUITE=lint
+  - TEST_SUITE=test
 
 
 
