@@ -17,13 +17,35 @@ cache:
   directories:
     - node_modules
 
-
+  
 matrix:
-  include:
-    - stage: test
-      script: ng lint
-      name: 'lint'
+    include:
+  - if [ $TRAVIS_BRANCH == "master" ] || [[ -n "$TRAVIS_TAG" ]]; then
+      ng lint;
+    else
+      yarn affected:lint --base=upstream/master --head=$TRAVIS_BRANCH;
+    fi
+  - if [ $TRAVIS_BRANCH == "master" ] || [[ -n "$TRAVIS_TAG" ]]; then
+      ng test --maxWorkers=2;
+    else
+      yarn affected:test --base=upstream/master --head=$TRAVIS_BRANCH --maxWorkers=2;
+    fi
+  - if [ $TRAVIS_BRANCH == "master" ] || [[ -n "$TRAVIS_TAG" ]]; then
+      yarn coverage-runner;
+    fi
+  - if [ $TRAVIS_BRANCH == "master" ]; then
+      ng build --prod;
+    elif [[ -n "$TRAVIS_TAG" ]]; then
+      ng build -c stg;
+    else
+      ng build;
+    fi
 
-    - stage: test
-      script: ng test
-      name: 'test'
+  # include:
+  #   - stage: test
+  #     script: ng lint
+  #     name: 'lint'
+
+  #   - stage: test
+  #     script: ng test
+  #     name: 'test'
