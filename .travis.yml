@@ -20,16 +20,6 @@ cache:
 
 jobs:
   include:
-    - script: COVERAGE=1 ng serve
-      name: 'Latest Node.js (with coverage)'
-
-
-    - &node
-      script: npm start test.node
-      node_js: '12'
-      name: 'Node.js v12'
-
-    
     - stage: lint
       script: ng lint
       name: 'lint'
@@ -37,8 +27,3 @@ jobs:
     - stage: test
       script: ng test
       name: 'test'
-
-
-
-env:
-  - 'NODE_OPTIONS="--trace-warnings"'
