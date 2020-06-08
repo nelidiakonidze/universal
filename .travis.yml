@@ -18,9 +18,9 @@ cache:
     - node_modules
 
 
-jobs:
+matrix:
   include:
-    - stage: lint
+    - stage: test
       script: ng lint
       name: 'lint'
 
